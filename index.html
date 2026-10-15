@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#5a2128">
+<meta name="description" content="Ankita Rana | Personal Portfolio - Class 12 Humanities student who loves reading and learning.">
+<title>Ankita Rana | Personal Portfolio</title>
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* ===== 1. COLOURS (yahan se colours badlo) ===== */
+:root{
+  --cream:#f4ecdd; --sand:#e6d9c1; --ink:#2b211b; --clay:#a4503a; --maroon:#5a2128;
+  --gold:#b8893a; --olive:#69694a; --muted:#6c5f52; --line:rgba(43,33,27,.2);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Noto Serif",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --radius:22px;
+}
+/* ===== 2. BASE ===== */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.7;overflow-x:hidden;overflow-x:clip}
+body.loading,body.menu-open{overflow:hidden}
+body::after{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:var(--clay)}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px}
+.container{width:min(1080px,90%);margin-inline:auto;position:relative;z-index:1}
+section{padding:5rem 0;position:relative}
+.eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);font-weight:700;margin-bottom:.6rem}
+h2{font-family:var(--serif);font-size:clamp(2.1rem,9vw,3.4rem);line-height:1.1;font-weight:600;margin-bottom:1rem}
+.sub{color:var(--muted);margin-bottom:2rem;max-width:36rem}
+.card{background:#fbf6ea;border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;position:relative;overflow:hidden}
+.tag{display:inline-block;font-size:.76rem;padding:.12rem .7rem;border:1px solid var(--line);border-radius:99px;color:var(--muted);margin:.25rem .25rem 0 0}
+.btn{display:inline-block;padding:.85rem 1.6rem;border-radius:99px;border:1.5px solid var(--ink);font:inherit;font-weight:700;color:var(--ink);background:transparent;text-decoration:none;cursor:pointer;transition:transform .2s,background .3s,color .3s}
+.btn:hover{background:var(--ink);color:var(--cream)}
+.btn:active{transform:scale(.95)}
+.btn.primary{background:var(--maroon);border-color:var(--maroon);color:var(--cream)}
+.btn.primary:hover{background:var(--clay);border-color:var(--clay)}
+/* ===== 3. PRELOADER ===== */
+#loader{position:fixed;inset:0;z-index:200;background:var(--maroon);display:grid;place-items:center;--r:-70px;
+  -webkit-mask-image:radial-gradient(circle at 50% 46%,transparent var(--r),#000 calc(var(--r) + 70px));
+  mask-image:radial-gradient(circle at 50% 46%,transparent var(--r),#000 calc(var(--r) + 70px))}
+.ld-wrap{position:relative;width:min(190px,52vw);text-align:center;color:var(--cream)}
+.ld-arch{display:block;width:100%;overflow:visible}
+.ld-arch path{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-dasharray:100;stroke-dashoffset:100}
+.ld-name{position:absolute;left:0;right:0;top:50%;font-family:var(--serif);letter-spacing:.28em;padding-left:.28em;font-size:1rem}
+.ld-name span{color:rgba(244,236,221,.25);transition:color .4s}
+.ld-name span.lit{color:var(--cream)}
+.ld-count{margin-top:1rem;font-family:var(--serif);font-size:1.4rem;color:var(--gold)}
+/* ===== 4. HEADER + MENU ===== */
+#bar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;z-index:130}
+header{position:fixed;top:0;left:0;right:0;z-index:100;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;background:rgba(244,236,221,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:background .4s,color .4s,border-color .4s}
+body.menu-open header{background:transparent;border-color:transparent;color:var(--cream);backdrop-filter:none;-webkit-backdrop-filter:none}
+.logo{font-family:var(--serif);font-weight:700;letter-spacing:.28em;text-decoration:none;color:inherit;font-size:1.15rem}
+.menu-btn{display:flex;align-items:center;gap:.6rem;background:none;border:1px solid currentColor;color:inherit;border-radius:99px;padding:.45rem .95rem;font:inherit;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.bars{width:16px;height:8px;position:relative}
+.bars::before,.bars::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform .4s}
+.bars::before{top:0}.bars::after{bottom:0}
+body.menu-open .bars::before{transform:translateY(3.25px) rotate(45deg)}
+body.menu-open .bars::after{transform:translateY(-3.25px) rotate(-45deg)}
+.overlay{position:fixed;inset:0;z-index:90;background:var(--maroon);color:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:0 8%;visibility:hidden;
+  clip-path:circle(0 at calc(100% - 52px) 31px);transition:clip-path .9s cubic-bezier(.7,0,.2,1),visibility 0s .9s}
+.overlay.open{visibility:visible;clip-path:circle(150vmax at calc(100% - 52px) 31px);transition:clip-path .9s cubic-bezier(.7,0,.2,1),visibility 0s}
+.overlay a{display:flex;align-items:baseline;gap:1rem;font-family:var(--serif);font-size:clamp(2.4rem,11vw,4.5rem);line-height:1.15;color:inherit;text-decoration:none;padding:.15rem 0;opacity:0;transform:translateY(40px);transition:opacity .6s,transform .6s,color .3s}
+.overlay.open a{opacity:1;transform:none;transition-delay:calc(.25s + var(--n)*.07s)}
+.overlay a small{font-family:var(--sans);font-size:.8rem;color:var(--gold);letter-spacing:.2em}
+.overlay a:hover,.overlay a:focus-visible{color:var(--gold)}
+/* ===== 5. KINETIC TEXT ===== */
+.kin .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
+.kin.settled .w{overflow:visible}
+.kin .ch{display:inline-block;transform:translateY(115%) rotate(10deg);opacity:0;transition:transform .9s cubic-bezier(.2,.9,.2,1),opacity .6s;transition-delay:calc(var(--i)*38ms)}
+.kin.in .ch,.ready .hero-kin .ch{transform:none;opacity:1}
+.ch.pop{animation:pop .7s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{30%{transform:translateY(-8%) scale(1.22) rotate(-7deg);color:var(--clay)}60%{transform:translateY(2%) scale(.94) rotate(3deg)}100%{transform:none}}
+.js .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s,transform .9s}
+.js .reveal.show{opacity:1;transform:none}
+.js .fade-up{opacity:0;transform:translateY(20px);transition:opacity .9s,transform .9s}
+.js .ready .fade-up{opacity:1;transform:none;transition-delay:calc(.5s + var(--d,0)*.12s)}
+/* ===== 6. HERO + 3D CARD ===== */
+#home{min-height:100vh;min-height:100svh;padding:6.5rem 0 3rem;display:flex;align-items:center;overflow:hidden;
+  background:radial-gradient(60% 50% at 85% 20%,rgba(164,80,58,.16),transparent 70%),radial-gradient(50% 40% at 0% 100%,rgba(105,105,74,.2),transparent 70%)}
+#home::before{content:"";position:absolute;right:-18%;top:6%;width:min(520px,90vw);aspect-ratio:3/4;border:1.5px solid var(--gold);border-radius:999px 999px 0 0;opacity:.35}
+.hero{display:grid;gap:2.5rem;align-items:center;width:min(1080px,90%);margin-inline:auto;position:relative;z-index:1}
+.chipline{display:inline-block;padding:.35rem 1rem;border:1px solid var(--line);border-radius:99px;font-size:.82rem;color:var(--muted);letter-spacing:.06em}
+.hero h1{font-family:var(--serif);font-size:clamp(3.6rem,19vw,7.2rem);line-height:.95;font-weight:600;margin:1rem 0 1.2rem;letter-spacing:-.02em}
+.hero h1 .w{display:block}
+.lead{font-family:var(--serif);font-style:italic;font-size:1.3rem;margin-bottom:.6rem}
+.lead2{color:var(--muted);max-width:30rem;margin-bottom:1.5rem}
+.actions{display:flex;flex-wrap:wrap;gap:.8rem}
+.where{font-size:.9rem;color:var(--muted);margin-top:1.2rem}
+.stage{perspective:900px;display:grid;place-items:center;padding:1rem 0}
+.card3d{position:relative;width:min(290px,74vw);aspect-ratio:3/4;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+.frame{position:absolute;inset:0;border-radius:999px 999px 26px 26px;overflow:hidden;border:2px solid var(--gold);background:linear-gradient(160deg,var(--clay),var(--maroon));box-shadow:0 30px 60px -20px rgba(90,33,40,.55)}
+.frame img,.s-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;image-orientation:from-image}
+.ph{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-size:4rem;color:var(--cream);letter-spacing:.1em}
+.ghost{position:absolute;inset:0;border-radius:999px 999px 26px 26px;border:1.5px solid var(--clay);transform:translateZ(-40px) translate(16px,16px);opacity:.6}
+.float{position:absolute;padding:.45rem .95rem;background:var(--cream);border:1px solid var(--gold);border-radius:99px;font-size:.8rem;font-weight:700;color:var(--maroon);box-shadow:0 10px 24px -10px rgba(43,33,27,.5);white-space:nowrap}
+.f1{top:12%;left:-12%;transform:translateZ(70px)}
+.f2{top:48%;right:-14%;transform:translateZ(90px)}
+.f3{bottom:8%;left:-6%;transform:translateZ(60px)}
+/* ===== 7. MARQUEE ===== */
+.marquee{padding:1.1rem 0;background:var(--maroon);color:var(--cream);overflow:hidden;transform:rotate(-1.5deg);margin:1rem -3% 0}
+.m-in{will-change:transform}
+.m-track{display:flex;width:max-content;animation:mq 26s linear infinite}
+.m-track span{font-family:var(--serif);font-size:clamp(1.4rem,6vw,2.4rem);white-space:nowrap;padding-right:1.5rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* ===== 8. ABOUT + PHYSICS ===== */
+.about p{color:var(--muted);margin-bottom:1rem;max-width:38rem}
+.about p:first-of-type{color:var(--ink);font-family:var(--serif);font-size:1.3rem;line-height:1.5}
+.playground{position:relative;height:360px;margin-top:2rem;border-radius:var(--radius);background:var(--ink);overflow:hidden;border:1px solid var(--gold);touch-action:pan-y}
+.pg-hint{position:absolute;left:0;right:0;top:12px;text-align:center;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#cdbfa8;pointer-events:none}
+.ball{position:absolute;left:0;top:0;display:grid;place-items:center;border-radius:50%;font-family:var(--serif);font-weight:600;font-size:.85rem;text-align:center;line-height:1.15;color:var(--cream);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
+  box-shadow:inset -8px -10px 18px rgba(0,0,0,.35),inset 6px 6px 14px rgba(255,255,255,.18),0 14px 22px -8px rgba(0,0,0,.6)}
+.ball:active{cursor:grabbing}
+.b-a{background:radial-gradient(circle at 30% 28%,#d57b5f,var(--clay) 60%,#6f2c1b)}
+.b-b{background:radial-gradient(circle at 30% 28%,#9b4650,var(--maroon) 62%,#2c0d11)}
+.b-c{background:radial-gradient(circle at 30% 28%,#e0bb74,var(--gold) 60%,#6e4e17);color:var(--ink)}
+.b-d{background:radial-gradient(circle at 30% 28%,#9a9a72,var(--olive) 60%,#35351f)}
+.b-e{background:radial-gradient(circle at 30% 28%,#f4ecdd,#d3c3a4 60%,#8a7a5e);color:var(--ink)}
+/* ===== 9. SCROLL PHOTO STORY ===== */
+#story{height:320vh;padding:0;background:var(--ink)}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.s-frame{position:absolute;inset:0;clip-path:inset(9% 21% 31% 21% round 220px 220px 26px 26px);background:linear-gradient(160deg,var(--clay),var(--maroon))}
+.s-frame img{transform:scale(1.35);filter:sepia(.75) saturate(.75)}
+.s-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,20,15,.92),rgba(30,20,15,.1) 60%);opacity:.45}
+.s-label{position:absolute;top:80px;left:7%;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.s-text{position:absolute;left:0;right:0;bottom:9%;height:0;color:var(--cream);pointer-events:none}
+.chap{position:absolute;left:7%;right:7%;bottom:0;opacity:0}
+.chap h3{font-family:var(--serif);font-size:clamp(2.6rem,12vw,5rem);font-weight:600;line-height:1}
+.chap p{max-width:30rem;color:#e4d8c3;margin-top:.6rem}
+.s-prog{position:absolute;left:7%;right:7%;bottom:4%;height:2px;background:rgba(244,236,221,.2)}
+.s-prog i{display:block;height:100%;background:var(--gold);transform-origin:left;transform:scaleX(0)}
+/* ===== 10. SKILLS, TABLE, PROJECTS, EDUCATION ===== */
+.skills-grid,.proj-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.skill h3,.proj h3{font-family:var(--serif);font-size:1.4rem}
+.skill p,.proj p{color:var(--muted);font-size:.92rem}
+.lv{display:flex;gap:6px;margin-top:1rem}
+.lv i{flex:1;height:8px;border-radius:99px;background:var(--sand);transition:background .5s;transition-delay:calc(var(--k)*120ms)}
+.lv i.on{background:linear-gradient(90deg,var(--clay),var(--gold))}
+.table-wrap{overflow-x:auto;margin-top:2rem;border:1px solid var(--line);border-radius:var(--radius);background:#fbf6ea}
+table{width:100%;border-collapse:collapse;min-width:540px}
+caption{text-align:left;padding:1rem;font-family:var(--serif);font-size:1.2rem;font-weight:700}
+th,td{padding:.8rem 1rem;text-align:left;border-top:1px solid var(--line)}
+thead th{color:var(--clay)}
+.proj{transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;min-height:230px}
+.proj::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.6),transparent 55%);opacity:var(--g,0);transition:opacity .3s;pointer-events:none}
+.num{font-family:var(--serif);font-size:3rem;color:var(--sand);line-height:1}
+.status{display:inline-block;font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:.3rem 0}
+.status.done{color:var(--olive)}.status.plan{color:var(--clay)}
+.timeline{border-left:3px solid var(--gold);padding-left:1.3rem;margin-left:.4rem}
+/* ===== 11. FORM + FOOTER ===== */
+form{display:grid;gap:1rem;max-width:560px}
+label{font-weight:700;display:block;margin-bottom:.3rem}
+input,textarea{width:100%;padding:.85rem 1rem;border-radius:14px;border:1px solid var(--line);background:#fbf6ea;color:var(--ink);font:inherit}
+textarea{min-height:130px;resize:vertical}
+.error{color:#a02a2a;font-size:.85rem;min-height:1.1em}
+#form-status{display:none;padding:1rem;border-radius:14px;border:1px solid var(--olive);background:#eef0e0}
+footer{background:var(--ink);color:#cdbfa8;text-align:center;padding:2.5rem 0}
+footer a{color:var(--gold)}
+#toTop{position:fixed;right:14px;bottom:16px;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:var(--maroon);color:var(--cream);font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:60}
+#toTop.visible{opacity:1;pointer-events:auto}
+/* ===== 12. RESPONSIVE + REDUCED MOTION ===== */
+@media(min-width:800px){.hero{grid-template-columns:1.2fr 1fr}.about{max-width:760px}}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .reveal,.js .fade-up{opacity:1;transform:none}
+  .kin .ch{opacity:1;transform:none}
+  #story{height:auto}
+  .sticky{position:relative;height:auto;padding:5rem 7%}
+  .s-frame{position:relative;inset:auto;height:70vh;clip-path:inset(0 round 26px)!important}
+  .s-frame img{transform:none!important;filter:none!important}
+  .s-shade,.s-prog,.s-label{display:none}
+  .s-text{position:static;height:auto;padding:1.5rem 0}
+  .chap{position:static;opacity:1!important;transform:none!important;margin-bottom:1.5rem}
+}
+</style>
+</head>
+<body class="loading">
+
+<!-- ===== PRELOADER ===== -->
+<div id="loader" aria-hidden="true">
+  <div class="ld-wrap">
+    <svg class="ld-arch" viewBox="0 0 200 240"><path pathLength="100" d="M30 230 V100 A70 70 0 0 1 170 100 V230 Z" id="ldPath"/></svg>
+    <div class="ld-name" id="ldName"><span>A</span><span>N</span><span>K</span><span>I</span><span>T</span><span>A</span></div>
+    <div class="ld-count"><span id="ldNum">0</span>%</div>
+  </div>
+</div>
+<div id="bar"></div>
+
+<!-- ===== HEADER + FULL SCREEN MENU ===== -->
+<header>
+  <a href="#home" class="logo">ANKITA</a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuOverlay"><span class="bars"></span><span class="lbl">Menu</span></button>
+</header>
+<nav class="overlay" id="menuOverlay" aria-label="Main navigation">
+  <a href="#home" style="--n:0"><small>01</small>Home</a>
+  <a href="#about" style="--n:1"><small>02</small>About</a>
+  <a href="#skills" style="--n:2"><small>03</small>Skills</a>
+  <a href="#projects" style="--n:3"><small>04</small>Projects</a>
+  <a href="#contact" style="--n:4"><small>05</small>Contact</a>
+</nav>
+
+<main>
+<!-- ===== HOME ===== -->
+<section id="home">
+  <div class="hero">
+    <div>
+      <span class="chipline fade-up" style="--d:0">Class 12 &bull; Humanities</span>
+      <h1 class="kin hero-kin">Ankita Rana</h1>
+      <p class="lead fade-up" style="--d:1">Building my future, one skill at a time.</p>
+      <p class="lead2 fade-up" style="--d:2">A Class 12 student who loves reading, learning new things and growing every day.</p>
+      <div class="actions fade-up" style="--d:3">
+        <a href="#projects" class="btn primary">Explore My Work</a>
+        <a href="#about" class="btn">About Me</a>
+      </div>
+      <p class="where fade-up" style="--d:4">📍 GGSSS Shakarpur School Block</p>
+    </div>
+    <div class="stage" id="stage">
+      <div class="card3d" id="card3d">
+        <div class="ghost"></div>
+        <div class="frame">
+          <div class="ph" aria-hidden="true">AR</div>
+          <!-- APNI PHOTO: photo.jpg naam ki file index.html ke folder mein rakho -->
+          <img data-photo src="photo.jpg" alt="Portrait of Ankita Rana">
+        </div>
+        <span class="float f1">Class 12</span>
+        <span class="float f2">Humanities</span>
+        <span class="float f3">📖 Book lover</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee" aria-hidden="true"><div class="m-in"><div class="m-track" id="mTrack">
+  <span>Reading ✦</span><span>Curiosity ✦</span><span>Creativity ✦</span><span>Growth ✦</span><span>Learning ✦</span>
+</div></div></div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container about">
+    <p class="eyebrow reveal">About me</p>
+    <h2 class="kin">Hi, I'm Ankita.</h2>
+    <p class="reveal">I'm a Class 12 student at GGSSS Shakarpur School Block, studying Humanities.</p>
+    <p class="reveal">I enjoy reading books and learning new things. I consider myself a hardworking, curious and creative person who is always willing to improve. I am currently working on developing my communication skills and improving my English so that I can express my thoughts more confidently.</p>
+    <p class="reveal">Although I am still exploring my future career options, I am excited to discover my interests, learn new skills, and grow both personally and academically. I believe that every new experience is an opportunity to learn something valuable.</p>
+    <!-- PHYSICS PLAYGROUND -->
+    <div class="playground reveal" id="pg" role="group" aria-label="Interactive playground: words that describe me">
+      <div class="pg-hint">Drag, throw &amp; tilt your phone</div>
+      <div class="ball b-a" style="width:110px;height:110px">Hardworking</div>
+      <div class="ball b-b" style="width:96px;height:96px">Curious</div>
+      <div class="ball b-c" style="width:100px;height:100px">Creative</div>
+      <div class="ball b-d" style="width:104px;height:104px">Book lover</div>
+      <div class="ball b-e" style="width:88px;height:88px">Learner</div>
+      <div class="ball b-a" style="width:92px;height:92px">Growing</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCROLL PHOTO STORY ===== -->
+<section id="story" aria-label="My story told with a photo">
+  <div class="sticky">
+    <div class="s-frame" id="sFrame">
+      <div class="ph" aria-hidden="true">AR</div>
+      <img data-photo src="photo.jpg" alt="Another view of Ankita Rana's portrait">
+      <div class="s-shade" id="sShade"></div>
+    </div>
+    <p class="s-label">My story &bull; keep scrolling</p>
+    <div class="s-text">
+      <article class="chap"><h3>Curious.</h3><p>I enjoy reading books and learning new things.</p></article>
+      <article class="chap"><h3>Creative.</h3><p>Hardworking, curious and always willing to improve.</p></article>
+      <article class="chap"><h3>Growing.</h3><p>Building my communication and English, step by step, to express my thoughts with confidence.</p></article>
+    </div>
+    <div class="s-prog"><i id="sBar"></i></div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="container">
+    <p class="eyebrow reveal">Skills</p>
+    <h2 class="kin">What I'm building.</h2>
+    <p class="sub reveal">Honest levels out of 5. I'm still learning, and that's the point.</p>
+    <div class="skills-grid">
+      <div class="card skill reveal"><h3>HTML</h3><p>Beginner, learning</p><div class="lv" data-level="2"></div></div>
+      <div class="card skill reveal"><h3>CSS</h3><p>Beginner, learning</p><div class="lv" data-level="2"></div></div>
+      <div class="card skill reveal"><h3>JavaScript</h3><p>Beginner, just started</p><div class="lv" data-level="1"></div></div>
+      <div class="card skill reveal"><h3>Communication</h3><p>Improving</p><div class="lv" data-level="3"></div></div>
+      <div class="card skill reveal"><h3>English</h3><p>Improving</p><div class="lv" data-level="3"></div></div>
+      <div class="card skill reveal"><h3>Creativity</h3><p>Developing</p><div class="lv" data-level="3"></div></div>
+    </div>
+    <!-- HTML TABLE -->
+    <div class="table-wrap reveal">
+      <table>
+        <caption>My Learning Overview</caption>
+        <thead><tr><th scope="col">Skill</th><th scope="col">Level</th><th scope="col">Status</th><th scope="col">Learning resource</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">HTML</th><td>Beginner</td><td>Learning</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN HTML</a></td></tr>
+          <tr><th scope="row">CSS</th><td>Beginner</td><td>Learning</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer">MDN CSS</a></td></tr>
+          <tr><th scope="row">JavaScript</th><td>Beginner</td><td>Just started</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">MDN JavaScript</a></td></tr>
+          <tr><th scope="row">English</th><td>Improving</td><td>Working on it</td><td><a href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener noreferrer">BBC Learning English</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="container">
+    <p class="eyebrow reveal">Projects</p>
+    <h2 class="kin">Things I make.</h2>
+    <p class="sub reveal">Touch and move over a card to tilt it. Planned projects are not built yet.</p>
+    <div class="proj-grid">
+      <article class="card proj reveal"><div class="num">01</div><span class="status done">Completed</span><h3>Personal Portfolio Website</h3><p>The website you are viewing right now, made for my Class 12 holiday homework.</p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></article>
+      <article class="card proj reveal"><div class="num">02</div><span class="status plan">Planned (sample)</span><h3>Sample Business Website Design</h3><p>A practice design of a small business website to learn layouts. Not built yet.</p><span class="tag">HTML</span><span class="tag">CSS</span></article>
+      <article class="card proj reveal"><div class="num">03</div><span class="status plan">Planned (demo)</span><h3>JavaScript Calculator</h3><p>A beginner-friendly calculator I plan to build to learn JavaScript logic. Not built yet.</p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education">
+  <div class="container">
+    <p class="eyebrow reveal">Education</p>
+    <h2 class="kin">Where I am now.</h2>
+    <div class="timeline reveal"><div class="card"><h3 style="font-family:var(--serif)">Class 12, Humanities</h3><p class="sub" style="margin:0">GGSSS Shakarpur School Block &bull; Currently studying</p></div></div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="kin">Say hello.</h2>
+    <p class="sub reveal">Demo form: it checks your input but does not send real messages (a static website has no backend).</p>
+    <form id="contactForm" class="reveal" novalidate>
+      <div><label for="name">Name</label><input id="name" type="text" autocomplete="name"><div class="error" id="nameErr"></div></div>
+      <div><label for="email">Email</label><input id="email" type="email" autocomplete="email"><div class="error" id="emailErr"></div></div>
+      <div><label for="message">Message</label><textarea id="message"></textarea><div class="error" id="msgErr"></div></div>
+      <button type="submit" class="btn primary">Send (Demo)</button>
+      <div id="form-status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <p>&copy; <span id="year">2026</span> Ankita Rana. All rights reserved.</p>
+    <p><a href="#home">↑ Back to top</a></p>
+    <!-- EDIT: apne real social links yahan add karo, fake mat daalo -->
+  </div>
+</footer>
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+/* ===== HELPERS ===== */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v)), lerp = (a,b,t) => a+(b-a)*t;
+const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ===== PHOTO FALLBACK (photo na mile to "AR" dikhega) ===== */
+$$('img[data-photo]').forEach(img => {
+  const fail = () => { img.style.display = 'none'; };
+  img.addEventListener('error', fail);
+  if (img.complete && img.naturalWidth === 0) fail();
+});
+
+/* ===== KINETIC TEXT: har letter alag span ===== */
+function split(el){
+  const text = el.textContent.trim(); el.setAttribute('aria-label', text); el.textContent = '';
+  let i = 0;
+  text.split(/\s+/).forEach((word, wi, arr) => {
+    const w = document.createElement('span'); w.className = 'w'; w.setAttribute('aria-hidden','true');
+    [...word].forEach(ch => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; s.style.setProperty('--i', i++); w.appendChild(s); });
+    el.appendChild(w); if (wi < arr.length-1) el.appendChild(document.createTextNode(' '));
+  });
+}
+$$('.kin').forEach(split);
+$$('.hero-kin .ch').forEach(c => {
+  const pop = () => { c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); };
+  c.addEventListener('pointerenter', pop); c.addEventListener('pointerdown', pop);
+  c.addEventListener('animationend', () => c.classList.remove('pop'));
+});
+
+/* ===== SKILL LEVEL DOTS ===== */
+$$('.lv').forEach(l => {
+  const n = +l.dataset.level; l.setAttribute('role','img'); l.setAttribute('aria-label','Level '+n+' out of 5');
+  for (let k=0;k<5;k++){ const i = document.createElement('i'); i.style.setProperty('--k',k); l.appendChild(i); }
+});
+
+/* ===== REVEAL ON SCROLL ===== */
+if ('IntersectionObserver' in window){
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const t = e.target;
+    if (t.classList.contains('kin')) t.classList.add('in');
+    else if (t.classList.contains('lv')) [...t.children].forEach((i,k) => i.classList.toggle('on', k < +t.dataset.level));
+    else t.classList.add('show');
+    io.unobserve(t);
+  }), {threshold:.15});
+  $$('.kin:not(.hero-kin), .reveal, .lv').forEach(el => io.observe(el));
+} else {
+  $$('.kin').forEach(el => el.classList.add('in')); $$('.reveal').forEach(el => el.classList.add('show'));
+  $$('.lv').forEach(t => [...t.children].forEach((i,k) => i.classList.toggle('on', k < +t.dataset.level)));
+}
+
+/* ===== MENU ===== */
+const mb = $('#menuBtn'), ov = $('#menuOverlay');
+function menu(open){
+  ov.classList.toggle('open', open); document.body.classList.toggle('menu-open', open);
+  mb.setAttribute('aria-expanded', open); mb.querySelector('.lbl').textContent = open ? 'Close' : 'Menu';
+}
+mb.addEventListener('click', () => menu(!ov.classList.contains('open')));
+$$('#menuOverlay a').forEach(a => a.addEventListener('click', () => menu(false)));
+addEventListener('keydown', e => { if (e.key === 'Escape') menu(false); });
+
+/* ===== 3D TILT (pointer + phone tilt) ===== */
+function tilt(area, el, max){
+  let r = null;
+  area.addEventListener('pointerenter', () => { r = area.getBoundingClientRect(); area.dataset.on = '1'; });
+  area.addEventListener('pointermove', e => {
+    if (!r) r = area.getBoundingClientRect();
+    const x = (e.clientX-r.left)/r.width, y = (e.clientY-r.top)/r.height;
+    el.style.setProperty('--ry', ((x-.5)*max*2).toFixed(2)+'deg');
+    el.style.setProperty('--rx', ((.5-y)*max*2).toFixed(2)+'deg');
+    el.style.setProperty('--mx', (x*100)+'%'); el.style.setProperty('--my', (y*100)+'%'); el.style.setProperty('--g', .45);
+  });
+  const off = () => { r = null; area.dataset.on = ''; el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg'); el.style.setProperty('--g',0); };
+  area.addEventListener('pointerleave', off); area.addEventListener('pointercancel', off);
+}
+let gx = 0;
+if (!reduce){
+  tilt($('#stage'), $('#card3d'), 14);
+  $$('.proj').forEach(p => tilt(p, p, 9));
+  if ('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission !== 'function'){
+    let base = null;
+    addEventListener('deviceorientation', e => {
+      if (e.gamma == null || e.beta == null) return;
+      if (!base) base = {g:e.gamma, b:e.beta};
+      gx = clamp(e.gamma/40,-1,1)*1200;
+      if ($('#stage').dataset.on) return;
+      $('#card3d').style.setProperty('--ry', (clamp((e.gamma-base.g)/30,-1,1)*10).toFixed(2)+'deg');
+      $('#card3d').style.setProperty('--rx', (clamp((e.beta-base.b)/30,-1,1)*-10).toFixed(2)+'deg');
+    });
+  }
+}
+
+/* ===== PHYSICS PLAYGROUND ===== */
+(function(){
+  const box = $('#pg'), els = $$('#pg .ball'); let balls = [], running = false, last = 0, W = 0, H = 0;
+  function render(){ balls.forEach(b => { b.el.style.transform = `translate3d(${(b.x-b.r).toFixed(1)}px,${(b.y-b.r).toFixed(1)}px,0)`; }); }
+  function step(dt){
+    const SUB = 2; dt /= SUB;
+    for (let s=0; s<SUB; s++){
+      balls.forEach(b => {
+        if (!b.drag){ b.vy += 1500*dt; b.vx += gx*dt; b.x += b.vx*dt; b.y += b.vy*dt; b.vx *= 1-.15*dt; b.vy *= 1-.05*dt; }
+        if (b.x < b.r){ b.x = b.r; b.vx = Math.abs(b.vx)*.55; }
+        if (b.x > W-b.r){ b.x = W-b.r; b.vx = -Math.abs(b.vx)*.55; }
+        if (b.y > H-b.r){ b.y = H-b.r; b.vy = -Math.abs(b.vy)*.5; if (Math.abs(b.vy) < 40) b.vy = 0; b.vx *= .985; }
+        if (b.drag && b.y < b.r) b.y = b.r;
+      });
+      for (let i=0;i<balls.length;i++) for (let k=i+1;k<balls.length;k++){
+        const a = balls[i], b = balls[k], dx = b.x-a.x, dy = b.y-a.y, d = Math.hypot(dx,dy), min = a.r+b.r;
+        if (d >= min || d === 0) continue;
+        const nx = dx/d, ny = dy/d, ov = min-d, ma = a.drag?1e6:a.m, mb2 = b.drag?1e6:b.m, tot = ma+mb2;
+        a.x -= nx*ov*(mb2/tot); a.y -= ny*ov*(mb2/tot); b.x += nx*ov*(ma/tot); b.y += ny*ov*(ma/tot);
+        const rv = (b.vx-a.vx)*nx + (b.vy-a.vy)*ny;
+        if (rv < 0){ const J = -(1.45)*rv/(1/ma+1/mb2); a.vx -= J*nx/ma; a.vy -= J*ny/ma; b.vx += J*nx/mb2; b.vy += J*ny/mb2; }
+      }
+    }
+  }
+  function layout(first){
+    W = box.clientWidth; H = box.clientHeight;
+    if (first){
+      balls = els.map((el,i) => { const r = el.offsetWidth/2; return {el, r, m:r*r, x:r+(W-2*r)*((i*.37+.13)%1), y:-r-i*70, vx:(Math.random()-.5)*200, vy:0, drag:false}; });
+      if (reduce){ for (let k=0;k<500;k++) step(1/60); render(); }
+    } else balls.forEach(b => { b.x = clamp(b.x,b.r,W-b.r); b.y = Math.min(b.y,H-b.r); });
+  }
+  layout(true); addEventListener('resize', () => layout(false));
+  function loop(t){ if (!running) return; const dt = clamp((t-last)/1000,0,1/30); last = t; step(dt); render(); requestAnimationFrame(loop); }
+  if ('IntersectionObserver' in window && !reduce){
+    new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting && !running){ running = true; last = performance.now(); requestAnimationFrame(loop); }
+      else if (!e.isIntersecting) running = false;
+    }), {threshold:.2}).observe(box);
+  }
+  els.forEach((el,i) => {
+    el.addEventListener('pointerdown', e => {
+      const b = balls[i]; if (reduce || !b) return;
+      e.preventDefault(); el.setPointerCapture(e.pointerId);
+      const r = box.getBoundingClientRect();
+      b.drag = true; b.ox = e.clientX-r.left-b.x; b.oy = e.clientY-r.top-b.y; b.lt = performance.now(); b.vx = b.vy = 0;
+    });
+    el.addEventListener('pointermove', e => {
+      const b = balls[i]; if (!b || !b.drag) return;
+      const r = box.getBoundingClientRect(), nx = e.clientX-r.left-b.ox, ny = e.clientY-r.top-b.oy, now = performance.now(), dt = Math.max((now-b.lt)/1000,.008);
+      b.vx = lerp(b.vx,(nx-b.x)/dt,.5); b.vy = lerp(b.vy,(ny-b.y)/dt,.5);
+      b.x = clamp(nx,b.r,W-b.r); b.y = clamp(ny,b.r,H-b.r); b.lt = now;
+    });
+    const up = () => { const b = balls[i]; if (!b || !b.drag) return; b.drag = false; if (performance.now()-b.lt > 90){ b.vx = b.vy = 0; } b.vx = clamp(b.vx,-2200,2200); b.vy = clamp(b.vy,-2200,2200); };
+    el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up); el.addEventListener('lostpointercapture', up);
+  });
+})();
+
+/* ===== SCROLL ENGINE: progress bar, marquee skew, parallax, photo story ===== */
+const story = $('#story'), sFrame = $('#sFrame'), sImg = $('#sFrame img'), sShade = $('#sShade'), chaps = $$('.chap'), sBar = $('#sBar');
+const mTrack = $('#mTrack'); mTrack.innerHTML += mTrack.innerHTML;
+const mq = $('.m-in'), stageEl = $('#stage'), toTop = $('#toTop');
+let lastY = scrollY, skew = 0, raf = 0;
+function updateStory(){
+  const total = story.offsetHeight - innerHeight, p = clamp(-story.getBoundingClientRect().top/total), t = ease(clamp(p/.55));
+  sFrame.style.clipPath = `inset(${lerp(9,0,t)}% ${lerp(21,0,t)}% ${lerp(31,0,t)}% ${lerp(21,0,t)}% round ${lerp(220,0,t)}px ${lerp(220,0,t)}px ${lerp(26,0,t)}px ${lerp(26,0,t)}px)`;
+  sImg.style.transform = `scale(${lerp(1.35,1.03,t)})`;
+  sImg.style.filter = `sepia(${lerp(.75,.05,t)}) saturate(${lerp(.75,1,t)})`;
+  sShade.style.opacity = lerp(.45,1,t);
+  const n = chaps.length;
+  chaps.forEach((c,i) => {
+    const local = p*n - i, fin = i === 0 ? 1 : clamp(local/.2), fout = i === n-1 ? 1 : clamp((1-local)/.2), o = Math.min(fin,fout);
+    c.style.opacity = o; c.style.transform = `translateY(${(1-fin)*36-(1-fout)*36}px)`;
+    c.firstElementChild.style.letterSpacing = ((1-o)*.25)+'em';
+  });
+  sBar.style.transform = `scaleX(${p})`;
+}
+function frame(){
+  raf = 0;
+  const y = scrollY, v = y-lastY; lastY = y;
+  skew += (clamp(v*.35,-14,14)-skew)*.15;
+  mq.style.transform = `skewX(${skew.toFixed(2)}deg)`;
+  const max = document.documentElement.scrollHeight - innerHeight;
+  $('#bar').style.transform = `scaleX(${max>0 ? y/max : 0})`;
+  toTop.classList.toggle('visible', y > 500);
+  if (!reduce && y < innerHeight*1.3) stageEl.style.transform = `translate3d(0,${(y*.12).toFixed(1)}px,0)`;
+  if (!reduce) updateStory();
+  if (Math.abs(skew) > .05 || v !== 0) raf = requestAnimationFrame(frame);
+}
+addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(frame); }, {passive:true});
+addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(frame); });
+if (!reduce) updateStory();
+toTop.addEventListener('click', () => window.scrollTo({top:0}));
+
+/* ===== CONTACT FORM (DEMO only, kuch send nahi hota) ===== */
+$('#year').textContent = new Date().getFullYear();
+$('#contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const n = $('#name').value.trim(), m = $('#email').value.trim(), msg = $('#message').value.trim();
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m);
+  $('#nameErr').textContent = n ? '' : 'Please enter your name.';
+  $('#emailErr').textContent = emailOk ? '' : 'Please enter a valid email.';
+  $('#msgErr').textContent = msg.length >= 10 ? '' : 'Message must be at least 10 characters.';
+  const st = $('#form-status');
+  if (n && emailOk && msg.length >= 10){
+    st.style.display = 'block';
+    st.textContent = '✅ Demo only: your form passed validation, but no email was sent and no data was stored.';
+    e.target.reset();
+  } else st.style.display = 'none';
+});
+
+/* ===== PRELOADER -> PAGE MORPH ===== */
+let isReady = false;
+function ready(){
+  if (isReady) return; isReady = true;
+  document.body.classList.add('ready');
+  setTimeout(() => $('.hero-kin').classList.add('settled'), 2200);
+}
+function removeLoader(){ const l = $('#loader'); if (l) l.remove(); document.body.classList.remove('loading'); ready(); }
+if (reduce){ removeLoader(); }
+else {
+  const loader = $('#loader'), path = $('#ldPath'), num = $('#ldNum'), letters = $$('#ldName span');
+  function openLoader(){
+    setTimeout(() => {
+      const d = 1300, t0 = performance.now(), max = Math.hypot(innerWidth, innerHeight)*.62 + 70;
+      (function grow(now){
+        const k = clamp((now-t0)/d), e = ease(k);
+        loader.style.setProperty('--r', (e*max-70)+'px');
+        if (k > .3) ready();
+        if (k < 1) requestAnimationFrame(grow); else removeLoader();
+      })(t0);
+    }, 350);
+  }
+  const start = performance.now(), dur = 2600;
+  (function tick(now){
+    const k = clamp((now-start)/dur), p = k<.5 ? 2*k*k : 1-Math.pow(-2*k+2,2)/2;
+    path.style.strokeDashoffset = 100 - p*100; num.textContent = Math.round(p*100);
+    letters.forEach((l,i) => l.classList.toggle('lit', p*100 >= (i+1)*15));
+    if (k < 1) requestAnimationFrame(tick); else openLoader();
+  })(start);
+  setTimeout(removeLoader, 7000); /* safety: loader kabhi atakega nahi */
+}
+</script>
+</body>
+</html>
